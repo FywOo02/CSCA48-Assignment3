@@ -371,12 +371,24 @@ intNode *related_with_restrictions(char source_ingredient[MAX_STR_LEN], char avo
     return new_list;    
 }
 
-int cal_weight(char name[MAX_STR_LEN], double AdjMat[MAT_SIZE][MAT_SIZE]){
+int judge_in_recipe(char src[MAX_STR_LEN], char recipe[10][MAX_STR_LEN]){
+  int checker = 0;
+  for(int i=0; i<10; i++){
+    if(strcmp(src, recipe[i]) == 0){
+      checker = 1;
+    }
+  }
+  return checker;
+}
+
+int cal_weight(char name[MAX_STR_LEN], double AdjMat[MAT_SIZE][MAT_SIZE], char recipe[10][MAX_STR_LEN], char to_change[MAX_STR_LEN]){
   int weight = 0;
   int index_src = ingredient_index(name);
-  for(int i=0 ; i<MAT_SIZE; i++){
-    if(i != index_src){
-      weight = weight + AdjMat[index_src][i];
+  int index_temp = 0;
+  for(int i=0 ; i<10; i++){
+    if(strcmp(recipe[i], to_change) != 0){
+      index_temp = ingredient_index(recipe[i]);
+      weight = weight + AdjMat[index_src][index_temp];
     }
   }
   return weight;
@@ -417,10 +429,12 @@ void substitute_ingredient(char recipe[10][MAX_STR_LEN], char to_change[MAX_STR_
    char com_name[MAX_STR_LEN];
    int temp_weight = 0;
    for(int i=0; i<MAT_SIZE; i++){
-     temp_weight = cal_weight(ingredients[i], AdjMat);
-     if(temp_weight > com_name){
-       com_weight = temp_weight;
-       strcpy(com_name, ingredients[i]);
+     if(judge_in_recipe(ingredients[i], recipe) == 0){
+      temp_weight = cal_weight(ingredients[i], AdjMat, recipe, to_change);
+      if(temp_weight > com_name){
+        com_weight = temp_weight;
+        strcpy(com_name, ingredients[i]);
+      }
      }
    }
 
