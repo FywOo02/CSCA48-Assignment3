@@ -305,7 +305,7 @@ intNode *related_k_dist(intNode *h, char source_ingredient[MAX_STR_LEN], int k, 
      * TO DO:
      * Complete this function
      *******/
-    if(k > dist){
+    if(k <= dist){
       return h;
     }
     int index = ingredient_index(source_ingredient);
@@ -337,7 +337,7 @@ intNode *related_with_restrictions(char source_ingredient[MAX_STR_LEN], char avo
      * (yes, we know the function doesn't take the head of a linked list as a parameter,
      *  that's not a mistake)
      * 
-     * Should return a pointer to the head of a list of ingredients related to 
+     * Should return a pointer to the head of a list of ingredients related to
      * 'rice' by a distance of up to 2, NOT INCLUDING 'nuts'.
      * 
      * intNode *head=NULL;
@@ -356,6 +356,7 @@ intNode *related_with_restrictions(char source_ingredient[MAX_STR_LEN], char avo
     intNode* original_list = NULL;
     original_list = related_k_dist(original_list, source_ingredient, k_source, 0);
     intNode* avoid_list = NULL;
+    avoid_list = insertInt(avoid_list, ingredient_index(avoid));
     avoid_list = related_k_dist(avoid_list, avoid, k_avoid, 0); 
     intNode* new_list = NULL;
 
@@ -431,7 +432,7 @@ void substitute_ingredient(char recipe[10][MAX_STR_LEN], char to_change[MAX_STR_
    for(int i=0; i<MAT_SIZE; i++){
      if(judge_in_recipe(ingredients[i], recipe) == 0){
       temp_weight = cal_weight(ingredients[i], AdjMat, recipe, to_change);
-      if(temp_weight > com_name){
+      if(temp_weight > com_weight){
         com_weight = temp_weight;
         strcpy(com_name, ingredients[i]);
       }
