@@ -442,7 +442,9 @@ void substitute_ingredient(char recipe[10][MAX_STR_LEN], char to_change[MAX_STR_
    //change the ingredient
    for(int i=0 ; i<10; i++){
      if(strcmp(to_change, recipe[i]) == 0){
-       strcpy(recipe[i], com_name);
+         if(com_weight != 0){
+           strcpy(recipe[i], com_name);
+         }
      }
    }
 }
