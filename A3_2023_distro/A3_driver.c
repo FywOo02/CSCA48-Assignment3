@@ -108,7 +108,7 @@ int main()
    head=deleteList(head);
 
    printf("\n ****** substituting ingredient 'quinoa' in recipe\n");
-   substitute_ingredient(recipe,"quinoa");
+   substitute_ingredient(recipe,"fresh breadcrumbs");
    for (int i=0; i<10; i++)
      if (strlen(recipe[i])>0) printf("%s\n",recipe[i]);
 

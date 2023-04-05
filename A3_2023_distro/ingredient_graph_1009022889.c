@@ -62,8 +62,8 @@
 
 #define MAX_STR_LEN 1024
 #ifndef __testing
-#define MAT_SIZE 10	// Use the small graph
-//#define MAT_SIZE 400	// Use full-size graph
+//#define MAT_SIZE 10	// Use the small graph
+#define MAT_SIZE 400	// Use full-size graph
 #endif
 
 // The following are GLOBAL variables you can use
@@ -389,9 +389,9 @@ int judge_in_recipe(char src[MAX_STR_LEN], char recipe[10][MAX_STR_LEN]){
 int cal_weight(char name[MAX_STR_LEN], double AdjMat[MAT_SIZE][MAT_SIZE], char recipe[10][MAX_STR_LEN], char to_change[MAX_STR_LEN]){
   int weight = 0;
   int index_src = ingredient_index(name);
-  int index_temp = 0;
+  int index_temp;
   for(int i=0 ; i<10; i++){
-    if(strcmp(recipe[i], to_change) != 0){
+    if(strcmp(recipe[i], to_change) != 0 && recipe[i][0] != '\0'){
       index_temp = ingredient_index(recipe[i]);
       weight = weight + AdjMat[index_src][index_temp];
     }
