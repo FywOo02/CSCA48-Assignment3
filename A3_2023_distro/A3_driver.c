@@ -111,13 +111,44 @@ int main()
    //substitute_ingredient(recipe,"quinoa");
    //for (int i=0; i<10; i++)
      //if (strlen(recipe[i])>0) printf("%s\n",recipe[i]);
-    char myrecp[10][MAX_STR_LEN]={"sunflower seeds", "soymilk", "quinoa", "fresh breadcrumbs",
+
+    /*char myrecp[10][MAX_STR_LEN]={"sunflower seeds", "soymilk", "quinoa", "fresh breadcrumbs",
                                   "medium shrimp","turkey","prepared horseradish","gruyere cheese","tomato juice","artichoke hearts"};
 
     printf("\n MyTest6****** substituting ingredient 'quinoa' in recipe\n");
     substitute_ingredient(myrecp,"quinoa");
     for (int i=0; i<10; i++)
         if (strlen(myrecp[i])>0) printf("%s\n",myrecp[i]);
+    */
+
+    //printf("\n MyTest1****** Related ingredients for quinoa:\n");
+    //related_ingredients("quinoa");
+
+    //printf("\n MyTest1****** Related ingredients for artichoke hearts:\n");
+    //related_ingredients("artichoke hearts");
+
+    //printf("\n MyTest1.5****** Related ingredients for quinoa:\n");
+    //related_ingredients("fresh breadcrumbs");
+
+    //printf("\n MyTest2****** Related to 'quinoa' k-dist, k=20 - Updated\n");
+    //head=related_k_dist(head,"quinoa",20,0);
+    //print_ingredients(head);
+    //head=deleteList(head);
+
+    printf("\n MyTest3****** Related with restrictions, 'quinoa', 'artichoke hearts', k_source=1, k_dest=10 - Updated;\n");
+    head=related_with_restrictions("quinoa","artichoke hearts",1,10);
+    print_ingredients(head);
+    head=deleteList(head);
+
+    printf("\n MyTest4****** Related with restrictions, 'quinoa', 'artichoke hearts', k_source=10, k_dest=1 - Updated;\n");
+    head=related_with_restrictions("quinoa","artichoke hearts",10,1);
+    print_ingredients(head);
+    head=deleteList(head);
+
+    printf("\n MyTest5****** Related with restrictions, 'quinoa', 'soymilk', k_source=10, k_dest=0 - Updated;\n");
+    head=related_with_restrictions("quinoa","soymilk",10,0);
+    print_ingredients(head);
+    head=deleteList(head);
 
     /* The OUTPUT of my solution to this assignment for the sample calls above is:
 
