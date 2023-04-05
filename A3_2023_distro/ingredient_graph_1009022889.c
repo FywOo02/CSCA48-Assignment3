@@ -247,10 +247,12 @@ void related_ingredients(char source_ingredient[MAX_STR_LEN])
      * Implement this function
      * ********/
     int index = ingredient_index(source_ingredient);
-    for(int i = 0; i<MAT_SIZE; i++){
-      if(AdjMat[index][i] > 0){
-        printf("%s\n", ingredients[i]);
-      }
+    if(index != -1){
+        for(int i = 0; i<MAT_SIZE; i++){
+            if(AdjMat[index][i] > 0){
+                printf("%s\n", ingredients[i]);
+            }
+        }
     }
 }
 
@@ -309,13 +311,15 @@ intNode *related_k_dist(intNode *h, char source_ingredient[MAX_STR_LEN], int k, 
       return h;
     }
     int index = ingredient_index(source_ingredient);
-    for(int i=0; i<MAT_SIZE; i++){
-      if(AdjMat[index][i] > 0){
-        if(searchInt(h, i) == 0){
-          h = insertInt(h, i);
+    if(index != -1){
+        for(int i=0; i<MAT_SIZE; i++){
+            if(AdjMat[index][i] > 0){
+                if(searchInt(h, i) == 0){
+                    h = insertInt(h, i);
+                }
+                h = related_k_dist(h, ingredients[i], k, dist+1);
+            }
         }
-        h = related_k_dist(h, ingredients[i], k, dist+1);
-      }
     }
     return h;
 }
